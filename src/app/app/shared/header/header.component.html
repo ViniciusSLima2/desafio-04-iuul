@@ -1,0 +1,14 @@
+<header class="main">
+    <div class="container">
+        <img ngSrc="money.svg" alt="Ícone de dinheiro" width="90" height="40">
+        
+
+        <ul class="link-wrapper" [ngClass]="{'enabled' : isEnabled}">
+            <li class="link"><a href="home">Sobre</a></li>
+            <li class="link"><a href="r">Produtos</a></li>
+            <li class="link"><a href="">Quem Somos</a></li>
+        </ul>
+
+        <button (click) = "changeView()" class="menu-hamburguer" [ngClass]="{'enabled' : isEnabled}"></button>
+    </div>
+</header>
