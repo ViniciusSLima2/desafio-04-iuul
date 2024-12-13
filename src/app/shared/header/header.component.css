@@ -99,7 +99,7 @@
             transition: height .5s ease;
             position: absolute;
             top: 43px;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(255, 255, 255, 0.8);
             flex-direction: column;
             align-items: center;
             .link:nth-child(1){

@@ -1,0 +1,9 @@
+.listar-moedas-container{
+    padding: 100px;
+}
+
+@media (max-width: 767px){
+    .listar-moedas-container{
+        padding: 20px;
+    }
+}

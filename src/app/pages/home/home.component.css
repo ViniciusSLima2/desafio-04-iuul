@@ -9,6 +9,9 @@
         flex-direction: column;
         gap: 10px;
 
+        .title, .description{
+            color: #000;
+        }
         .cta-wrapper{
             display: flex;
             justify-content: center;

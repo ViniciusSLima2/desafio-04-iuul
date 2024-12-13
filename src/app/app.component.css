@@ -1,9 +1,12 @@
 .content-container{
     display: flex;
     flex-direction: column;
+    background-color: #FFF;
+    min-height: 100vh;
     & .content{
         margin-top: 64px;
     }
+    
 }
 
 @media (max-width: 767px){
