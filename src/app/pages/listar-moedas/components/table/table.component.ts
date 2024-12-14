@@ -15,18 +15,7 @@ export class TableComponent {
   @ViewChild('dt2') dt2: Table | undefined;
   currencySymbolName : any;
   constructor(private currencyService: CurrencyService) {
-    currencyService.getAllNameSymbolPair().subscribe({
-      next: (currencySynbolName) => {
-        this.currencySymbolName = currencySynbolName
-      },
-      error: (err) => {
-        console.error('Erro ao buscar dados:', err);
-      },
-    });
-    //const bluePalette = palette('#1d51ceb3');
-    const bluePalette = palette('#1d51ce');
-    console.log(bluePalette)
-    updatePrimaryPalette(bluePalette);
+    this.currencySymbolName = currencyService.getAllNameSymbolPair()
   }
 
   applyFilterGlobal($event: any, stringVal: string){

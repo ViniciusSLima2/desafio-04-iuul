@@ -1,0 +1,77 @@
+<div class="conversor-main">
+    <div class="conversor-container">
+        <h1>Conversor de Moeda</h1>
+        <form [formGroup]="currencyConverterForm" (ngSubmit)="onSubmit()" class="form-container">
+
+            <div class="select-container">
+                <label for="amount" class="select-label">Amount: </label>
+                <input id="amount" type="text" formControlName="amount" class="amount-input">
+                @if(currencyConverterForm.controls["amount"].invalid){
+                    <p class="error-message">Digite somente números positivos, com no máximo, 2 casa decimais!</p>
+                }
+            </div>
+
+            <div class="currencies-container">
+                <div class="select-container">
+                    <label for="currency" class="select-label">From: </label>
+                    <p-select [options]="currencies" formControlName="from" optionLabel="name"
+                        class="select-currency-container" [virtualScroll]="true" [virtualScrollItemSize]="20">
+                        <ng-template #selectedItem let-selectedOption>
+                            <div class="currency-option">
+                                <img [ngSrc]="selectedOption.imgUrl" [alt]="selectedOption.imgAlt" width="20"
+                                    height="20" />
+                                <div>{{ selectedOption.code }}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-country #item>
+                            <div class="currency-option">
+                                <img [ngSrc]="country.imgUrl" [alt]="country.imgAlt" width="20" height="20" />
+                                <div>{{ country.code }}</div>
+                            </div>
+                        </ng-template>
+                    </p-select>
+                </div>
+
+                <div class="invert-currencies-container" (click)="invertSelectedCurrencies()">
+                    <img ngSrc="/sync_alt.svg" alt="" width="40" height="40">
+                </div>
+
+                <div class="select-container">
+                    <label for="currency" class="select-label">To: </label>
+                    <p-select [options]="currencies" formControlName="to" optionLabel="name"
+                        class="select-currency-container" [virtualScroll]="true" [virtualScrollItemSize]="20">
+                        <ng-template #selectedItem let-selectedOption>
+                            <div class="currency-option">
+                                <img [ngSrc]="selectedOption.imgUrl" [alt]="selectedOption.imgAlt" width="20"
+                                    height="20" />
+                                <div>{{ selectedOption.code }}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-country #item>
+                            <div class="currency-option">
+                                <img [ngSrc]="country.imgUrl" [alt]="country.imgAlt" width="20" height="20" />
+                                <div>{{ country.code }}</div>
+                            </div>
+                        </ng-template>
+                    </p-select>
+                </div>
+            </div>
+            <p>1 {{this.currencyConverterForm.get("from")?.value?.code}}
+                = {{exchangeRate}} {{this.currencyConverterForm.get("to")?.value?.code}}
+            </p>
+            <button type="submit" class="convert-btn" [disabled]="!currencyConverterForm.valid">Converter Moedas</button>
+
+            <p-dialog header="Conversão realizada!" [modal]="true" [(visible)]="visibleDialog" [style]="{ width: '25rem', borderRadius: '10px'}">
+                <span class="p-text-secondary block mb-8">Converteu {{this.currencyConverterForm.get("amount")?.value}} 
+                    {{this.currencyConverterForm.get("from")?.value?.code}} para  {{ (currencyConverterForm.get("amount")?.value | convertToNumber) * exchangeRate }}
+                    {{this.currencyConverterForm.get("to")?.value?.code}}    
+                </span>
+                <div class="close-modal-btn-wrapper">
+                    <p (click)="closeDialog()" class="close-modal-btn">Fechar</p>
+                </div>
+
+            </p-dialog>
+        </form>
+
+    </div>
+</div>

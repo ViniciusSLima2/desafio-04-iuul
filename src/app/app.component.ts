@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
-
+import { palette } from '@primeng/themes';
+import { updatePrimaryPalette } from '@primeng/themes';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,4 +12,10 @@ import { HeaderComponent } from './shared/header/header.component';
 })
 export class AppComponent {
   title = 'Conversor de moedas';
+
+  constructor(){
+    const bluePalette = palette('#1d51ce');
+    updatePrimaryPalette(bluePalette);
+  }
+
 }

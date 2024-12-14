@@ -10,5 +10,6 @@
 :root{
     --main-color: rgb(29, 81, 206);
     --main-color-80: rgba(29, 81, 206, 0.8);
+    --main-color-10: rgba(29, 81, 206, 0.1);
     color-scheme: light !important;
 }
