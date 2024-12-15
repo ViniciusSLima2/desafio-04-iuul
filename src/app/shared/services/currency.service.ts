@@ -23,8 +23,15 @@ export class CurrencyService {
     });
   }
 
-  getAllNameSymbolPair(): {code:string, name:string}[]{
-    return this.currenciesCodeName;
+  getAllNameSymbolPair(): Observable<{code:string, name:string}[]>{
+    return this.http.get<any>(`${this.apiUrl}/codes`).pipe(
+      map((response) =>
+        response.supported_codes.map(([code, name]: [string, string]) => ({
+          code,
+          name,
+        }))
+      )
+    )
   }
 
   getCurrenciesCodeImages() : Observable<{code: string, imgUrl: string, imgAlt: string}[]>{

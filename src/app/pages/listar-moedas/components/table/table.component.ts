@@ -1,9 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { CurrencyService } from '../../../../shared/services/currency.service';
 import { NgOptimizedImage } from '@angular/common';
-import { updatePrimaryPalette } from '@primeng/themes';
-import { palette } from '@primeng/themes';
 @Component({
   selector: 'app-table',
   standalone: true,
@@ -13,10 +11,17 @@ import { palette } from '@primeng/themes';
 })
 export class TableComponent {
   @ViewChild('dt2') dt2: Table | undefined;
-  currencySymbolName : any;
-  constructor(private currencyService: CurrencyService) {
-    this.currencySymbolName = currencyService.getAllNameSymbolPair()
+  currencySymbolName : {code:string, name:string}[] = [];
+
+
+  constructor(private currencyService: CurrencyService){
+    this.currencyService.getAllNameSymbolPair().subscribe({
+      next: (res => this.currencySymbolName = res),
+      error: (error => console.log("Erro em requisitar nameSymbolPair"))
+    })
   }
+
+
 
   applyFilterGlobal($event: any, stringVal: string){
     this.dt2!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);

@@ -2,7 +2,7 @@ import { Component, inject} from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CurrencyService } from '../../shared/services/currency.service';
-import { NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Select } from 'primeng/select';
 import {Dialog} from 'primeng/dialog'
 import { ConvertToNumberPipe } from './convert-to-number.pipe';
@@ -19,7 +19,7 @@ interface ConversionRates {
 @Component({
   selector: 'app-conversor',
   standalone: true,
-  imports: [ReactiveFormsModule, NgOptimizedImage, Select, FormsModule, Dialog, ConvertToNumberPipe],
+  imports: [ReactiveFormsModule, NgOptimizedImage, Select, FormsModule, Dialog, ConvertToNumberPipe, CommonModule],
   templateUrl: './conversor.component.html',
   styleUrl: './conversor.component.css'
 })
