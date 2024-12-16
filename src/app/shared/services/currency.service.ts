@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { environment } from '../../../enviroments/enviroment';
 import { map, catchError, of } from 'rxjs';
+import { LocalStorageService } from './localStorage/local-storage.service';
 @Injectable({
   providedIn: 'root'
 })
 export class CurrencyService {
   apiUrl: string;
   currenciesCodeName = []
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
     this.apiUrl = "https://v6.exchangerate-api.com/v6/" + environment.apiKey
     this.http.get<any>(`${this.apiUrl}/codes`).pipe(
       map((response) =>
@@ -60,5 +62,15 @@ export class CurrencyService {
     return this.http.get<any>(`${this.apiUrl}/latest/${currency}`).pipe(
       map((response) => response.conversion_rates)
     )
+  }
+
+  insertConversionIntoStorage(data:any){
+    let conversionHistoric = this.localStorageService.getItem('conversion-historic');
+    if(conversionHistoric){
+      const newConversionHistoric: string = JSON.stringify([...JSON.parse(conversionHistoric), data])
+      this.localStorageService.setItem('conversion-historic', newConversionHistoric)
+    }else{
+      this.localStorageService.setItem('conversion-historic', JSON.stringify([data]))
+    }
   }
 }

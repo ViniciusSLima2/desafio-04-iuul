@@ -24,7 +24,10 @@ interface ConversionRates {
   styleUrl: './conversor.component.css'
 })
 export class ConversorComponent {
-  currencies: {code:string, imgUrl: string, imgAlt: string}[] = []
+  currencies: {code:string, imgUrl: string, imgAlt: string}[] = [
+    {code:'BRL', imgUrl: "https://flagcdn.com/br.svg", imgAlt: "The flag of Brazil has a green field with a large yellow rhombus in the center. Within the rhombus is a dark blue globe with twenty-seven small five-pointed white stars depicting a starry sky and a thin white convex horizontal band inscribed with the national motto 'Ordem e Progresso' across its center."},
+    {code : 'JPY', imgUrl: "https://flagcdn.com/jp.svg", imgAlt: "The flag of Japan features a crimson-red circle at the center of a white field."}
+  ]
   exchangeRate: number = 0;
   calculatedAmount: number = 0;
   fromCurrencyExchangeRates: ConversionRates = {}
@@ -70,6 +73,20 @@ export class ConversorComponent {
 
   onSubmit(){
     if (this.currencyConverterForm.valid) {
+      const amount = Number(this.currencyConverterForm.get("amount")?.value)
+      const todayDate = new Date();
+      const date = `${todayDate.getDate()}/${todayDate.getMonth()}/${todayDate.getFullYear()}`
+      const hour = `${todayDate.getHours()}:${todayDate.getMinutes()}:${todayDate.getSeconds()}`
+      const submitedData = {
+        from: this.currencyConverterForm.get("from")?.value?.code,
+        to: this.currencyConverterForm.get("to")?.value?.code,
+        amount: amount,
+        exchangeRate : this.exchangeRate,
+        convertedValue : amount * this.exchangeRate,
+        date : date,
+        hour : hour
+      }
+      this.currencyService.insertConversionIntoStorage(submitedData);
       this.showDialog()
     } else {
       this.currencyConverterForm.markAllAsTouched();
