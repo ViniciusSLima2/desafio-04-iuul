@@ -1,0 +1,80 @@
+.historic-main{
+    padding: 100px;
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1{
+        color: var(--main-color);
+    }
+
+    & .search-bar-container{
+        background-color: rgba(29, 81, 206, 0.1);
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        & .search-bar{
+            position: relative;
+            background-color: rgba(29, 81, 206, 0.01);
+            color: #000;
+            padding: 5px 10px;
+            border: none;
+
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+}
+
+.trash-icon{
+    cursor: pointer;
+}
+
+.dialog-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & .action-btn-wrapper{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .btn{ 
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .close-modal-btn{
+            color: var(--main-color);
+            background-color: var(--main-color-10);
+        }
+
+        .confirm-modal-btn{
+            color: #FFF;
+            background-color: var(--main-color);
+        }
+    }
+}
+
+@media (max-width: 767px){
+    .historic-main{
+        padding: 20px;
+
+        & .search-bar-container{
+            padding: 5px;
+        }
+    }
+
+    .header-container{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

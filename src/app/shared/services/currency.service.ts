@@ -66,6 +66,8 @@ export class CurrencyService {
 
   insertConversionIntoStorage(data:any){
     let conversionHistoric = this.localStorageService.getItem('conversion-historic');
+    const uniqueId = btoa(JSON.stringify(data));
+    data.id = uniqueId;
     if(conversionHistoric){
       const newConversionHistoric: string = JSON.stringify([...JSON.parse(conversionHistoric), data])
       this.localStorageService.setItem('conversion-historic', newConversionHistoric)

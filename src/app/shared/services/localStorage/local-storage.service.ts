@@ -16,6 +16,7 @@ export class LocalStorageService {
   }
 
   setItem(key: string, value: string): void {
+
     this.localStorage?.setItem(key, value);
   }
 }

@@ -1,1 +1,59 @@
-<p>historico works!</p>
+<div class="historic-main">
+    <div class="table-wrapper">
+        <p-table #dt [value]="conversionsHistoric" [rows]="10" [paginator]="true"
+            [globalFilterFields]="['from', 'to']"
+            [tableStyle]="{ 'min-width': '75rem' }" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+            <ng-template #caption>
+                <div class="header-container">
+                    <h1>Histórico</h1>
+                    <div class="search-bar-container" (click)="focusInput(searchInput)">
+                        <img ngSrc="magnifying-glass.svg" alt="" width="20" height="20">
+                        <input #searchInput pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Pesquise por moeda" class="search-bar" />
+                    </div>
+
+                </div>
+            </ng-template>
+            <ng-template #header>
+                <tr>
+                    <th>Data da Conversão</th>
+                    <th>Hora da Conversão</th>
+                    <th>Valor Informado</th>
+                    <th>Moeda selecionada</th>
+                    <th>Moeda convertida</th>
+                    <th>Resultado</th>
+                    <th>Taxa</th>
+                    <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-conversion>
+                <tr>
+                    <td style="min-width: 12rem">{{ conversion.date }}</td>
+                    <td style="min-width: 16rem">{{ conversion.hour }}</td>
+                    <td style="min-width: 16rem">{{ conversion.amount }}</td>
+                    <td style="min-width: 16rem">{{ conversion.from }}</td>
+                    <td style="min-width: 16rem">{{ conversion.to }}</td>
+                    <td style="min-width: 16rem">{{ conversion.convertedValue | number: '1.2-2' }}</td>
+                    <td style="min-width: 16rem">{{ conversion.exchangeRate | number: '1.2-2' }}</td>
+                    <td style="min-width: 16rem">
+                        <img ngSrc="trash.svg" alt="Ícone de lata de lixo" (click)="confirmConversionDelete(conversion)" width="30" height="30" class="trash-icon">
+                    </td>
+    
+                </tr>
+            </ng-template>
+            <ng-template #summary>
+                <div class="flex items-center justify-between">Existem {{ conversionsHistoric ? conversionsHistoric.length :
+                    0 }} conversões.</div>
+            </ng-template>
+        </p-table>
+        <p-dialog header="Tem certeza que quer deletar?"[modal]="true" [(visible)]="visibleConfirmConversionDelete" [style]="{ width: '25rem', borderRadius: '10px'}">
+            <div class="dialog-wrapper">
+                <div class="action-btn-wrapper">
+                    <p (click)="closeConfirmDeleteDialog()" class="close-modal-btn btn">Cancelar</p>
+                    <p (click)="deleteConversion()" class="confirm-modal-btn btn">Deletar</p>
+                </div>
+            </div>
+
+        </p-dialog>
+    </div>
+</div>
