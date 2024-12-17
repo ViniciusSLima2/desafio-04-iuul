@@ -50,4 +50,8 @@ export class HistoricoComponent {
   focusInput(input: HTMLInputElement){
     input.focus()
   }
+
+  amountRowStyle(conversion: any){
+    return Number(conversion.amount) > 1000 ? "highlight-row" : ""
+  }
 }
