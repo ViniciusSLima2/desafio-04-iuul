@@ -25,7 +25,6 @@ export class HeaderComponent {
     const currentUrl = this.location.path().replace("/", "");
     allLinks.forEach((element:any) => {
       if(element.id === currentUrl) element.classList.add("current-url")
-      console.log(element.id)
     });
   }
 }

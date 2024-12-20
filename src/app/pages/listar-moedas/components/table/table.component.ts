@@ -12,17 +12,12 @@ import { NgOptimizedImage } from '@angular/common';
 export class TableComponent {
   @ViewChild('dt2') dt2: Table | undefined;
   currencySymbolName : {code:string, name:string}[] = [];
-
-
   constructor(private currencyService: CurrencyService){
     this.currencyService.getAllNameSymbolPair().subscribe({
       next: (res => this.currencySymbolName = res),
       error: (error => console.log("Erro em requisitar nameSymbolPair"))
     })
   }
-
-
-
   applyFilterGlobal($event: any, stringVal: string){
     this.dt2!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }

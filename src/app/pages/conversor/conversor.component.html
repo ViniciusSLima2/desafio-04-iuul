@@ -62,7 +62,7 @@
             <button type="submit" class="convert-btn" [disabled]="!currencyConverterForm.valid">Converter Moedas</button>
 
             <p-dialog header="Conversão realizada!" [modal]="true" [(visible)]="visibleDialog" [style]="{ width: '25rem', borderRadius: '10px'}">
-                <span class="p-text-secondary block mb-8">Converteu {{this.currencyConverterForm.get("amount")?.value}} 
+                <span class="p-text-secondary block mb-8">Converteu {{this.currencyConverterForm.get("amount")?.value | number: '1.2-2'}} 
                     {{this.currencyConverterForm.get("from")?.value?.code}} para  {{ (currencyConverterForm.get("amount")?.value | convertToNumber) * exchangeRate | number: '1.2-2' }}
                     {{this.currencyConverterForm.get("to")?.value?.code}}    
                 </span>

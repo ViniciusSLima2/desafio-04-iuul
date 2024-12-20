@@ -30,7 +30,7 @@
                 <tr [ngClass]="amountRowStyle(conversion)">
                     <td style="min-width: 12rem">{{ conversion.date }}</td>
                     <td style="min-width: 16rem">{{ conversion.hour }}</td>
-                    <td style="min-width: 16rem">{{ conversion.amount }}</td>
+                    <td style="min-width: 16rem">{{ conversion.amount | number: '1.2-2'}}</td>
                     <td style="min-width: 16rem">{{ conversion.from }}</td>
                     <td style="min-width: 16rem">{{ conversion.to }}</td>
                     <td style="min-width: 16rem">{{ conversion.convertedValue | number: '1.2-2' }}</td>

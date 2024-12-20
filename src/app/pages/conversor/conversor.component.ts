@@ -75,7 +75,7 @@ export class ConversorComponent {
     if (this.currencyConverterForm.valid) {
       const amount = Number(this.currencyConverterForm.get("amount")?.value)
       const todayDate = new Date();
-      const date = `${todayDate.getDate()}/${todayDate.getMonth()}/${todayDate.getFullYear()}`
+      const date = `${todayDate.getDate()}/${todayDate.getMonth() + 1}/${todayDate.getFullYear()}`
       const hour = `${todayDate.getHours()}:${todayDate.getMinutes()}:${todayDate.getSeconds()}`
       const submitedData = {
         from: this.currencyConverterForm.get("from")?.value?.code,
