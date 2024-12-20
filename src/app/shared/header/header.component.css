@@ -20,6 +20,7 @@
     & .link-wrapper {
         display: flex;
         gap: 10px;
+        align-items: center;
         list-style: none;
         .link a {
             text-decoration: none;
@@ -30,8 +31,12 @@
             &:hover {
                 color: rgba(29, 81, 206, 0.7);
             }
+        }
 
-            font-weight: 600;
+        & .current-url{
+            background-color: rgb(29, 81, 206, 0.2);
+            padding: 5px;
+            border-radius: 5px;
         }
     }
 
@@ -102,10 +107,13 @@
             background-color: rgba(255, 255, 255, 0.8);
             flex-direction: column;
             align-items: center;
-            .link:nth-child(1){
+            z-index: 999;
+            & .link:nth-child(1){
                 padding-top: 10px;
             }
-            z-index: 999;
+        
+
+
         }
 
         & .link-wrapper.enabled{
@@ -113,3 +121,4 @@
         }
     }
 }
+
