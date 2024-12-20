@@ -2,12 +2,20 @@
     padding: 100px;
 }
 
+.highlight-row{
+    background-color: var(--main-color-10) !important;
+}
+
 .header-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
     h1{
         color: var(--main-color);
+    }
+
+    & .highlight-row{
+        
     }
 
     & .search-bar-container{
